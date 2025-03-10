@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng 8/3</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #f5f5dc; /* Nền màu be */
+            text-align: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            position: relative;
+        }
+        .heart {
+            font-size: 30px;
+            color: #d63384;
+            opacity: 0;
+            transform: scale(0) translateY(50px);
+            animation: growHeart 2s ease-in-out forwards;
+            position: relative;
+            top: 100px; /* Dịch lên trên */
+        }
+        @keyframes growHeart {
+            0% { transform: scale(0) translateY(50px); opacity: 0; }
+            100% { transform: scale(5) translateY(-30px); opacity: 1; }
+        }
+        .message {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 70px; /* Lùi xuống xa hơn */
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out 1.5s forwards, colorChange 5s infinite alternate;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes colorChange {
+            0% { color: #d63384; }
+            20% { color: #ff4500; }
+            40% { color: #ffa500; }
+            60% { color: #32cd32; }
+            80% { color: #1e90ff; }
+            100% { color: #ff69b4; }
+        }
+        .falling-heart {
+            position: absolute;
+            font-size: 20px;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(101vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="heart">❤️</div>
+    <div class="message" id="message"></div>
+
+    <script>
+        // Danh sách lời chúc 8/3 ngẫu nhiên
+        const messages = [
+            "Chúc bạn một ngày 8/3 tràn ngập niềm vui và hạnh phúc! ❤️",
+            "Gửi đến bạn những lời chúc tốt đẹp nhất nhân ngày 8/3! 💖",
+            "Chúc bạn luôn rạng rỡ, xinh đẹp và thành công trong cuộc sống! 💐",
+            "Ngày 8/3 vui vẻ nhé! Chúc bạn luôn tràn đầy năng lượng tích cực! 💕",
+            "Chúc bạn một ngày đặc biệt với thật nhiều yêu thương và hạnh phúc! 🌸"
+        ];
+
+        // Hiển thị lời chúc ngẫu nhiên
+        document.getElementById("message").innerText = messages[Math.floor(Math.random() * messages.length)];
+
+        // Màu sắc ngẫu nhiên cho hoa hình trái tim
+const heartColors = ["❤️", "💖", "💛", "💜", "💚", "💙", "❤️‍🔥"];
+
+        // Tạo hiệu ứng hoa rơi
+        function createFallingHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("falling-heart");
+            heart.innerText = heartColors[Math.floor(Math.random() * heartColors.length)];
+            heart.style.left = Math.random() * window.innerWidth + "px";
+            heart.style.fontSize = Math.random() * 16 + 10 + "px"; // Kích thước ngẫu nhiên
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s"; // 2-5 giây
+            document.body.appendChild(heart);
+
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+
+        setInterval(createFallingHeart, 300);
+    </script>
+
+</body>
+</html>
